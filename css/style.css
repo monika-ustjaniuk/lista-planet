@@ -1,0 +1,72 @@
+body {
+    background-color: honeydew;
+}
+header h1{
+    text-transform: uppercase;
+    color: #fff;
+    background-color: rgb(119, 155, 65);
+    text-align: center;
+    padding: 20px;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+.search{
+    width: 70%;
+    display: flex;
+    justify-content: end;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.search input {
+    padding: 10px 50px;
+    cursor: pointer;
+    outline: 0;
+    border: 2px solid rgb(109, 131, 109);
+    border-radius: 10px;
+}
+
+.search input:focus{
+    border: 2px solid rgb(57, 207, 57);
+}
+
+#list {
+   display: flex;
+   flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-transform: uppercase;
+}
+
+#list p {
+    text-transform: none;
+}
+
+h3 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(95, 124, 42);
+}
+
+a:hover{
+    color: forestgreen;
+}
+
+#list-item{
+    width: 20%;
+    height: 300px;
+    padding-left: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 10px 1px rgb(161, 160, 160);
+    background-color: rgb(215, 231, 195);
+}
+
+.hide{
+    visibility: hidden;
+}
