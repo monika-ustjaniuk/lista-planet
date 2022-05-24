@@ -16,17 +16,9 @@
     <div class="search">
         <input type="text" id="search-bar" placeholder="Find the planet" data-input>
     </div>
-   
+
     <section id="list" data-planets-container>
-        <template  data-template>
-        <div id="list-item" >
-            <h1 class="name">Planet name: <a href="" data-name></a></h1>
-            <h3 class="diameter">Diameter: <span data-diameter></span></h3>
-            <h3 class="gravity">Gravity: <span data-gravity></span></h3>
-            <h3 class="climate">Climate: <span data-climate></span></h3>
-            <p class="about">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid omnis aut eveniet illo itaque.</p>
-        </template>
-    <!--     <div id="list-item">
+          <!--   <div id="list-item">
             <h1 class="name">nazwa planety: <a href=""></a></h1>
             <h3 class="diameter">diameter: </h3>
             <h3 class="gravity"> gravity: </h3>
@@ -34,10 +26,26 @@
             <p class="about">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Temporibus, voluptate.</p>
         </div> -->
-        
-      
-
     </section>
+    <template data-template>
+        <div id="list-item" class="card" data-card>
+            <h1 class="name">Planet name: <a href="" data-name></a></h1>
+            <h3 class="diameter">Diameter: <span data-diameter></span></h3>
+            <h3 class="gravity">Gravity: <span data-gravity></span></h3>
+            <h3 class="climate">Climate: <span data-climate></span></h3>
+            <p class="about">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid omnis aut eveniet
+                illo itaque.</p>
+    </template>
+
+    <div id="pagination" >
+        <ul data-pagination-container>
+        </ul>
+        <template data-pagination-template>
+            <li class="page-item"> <a class="page-link" href="#" data-page></a></li>
+        </template>
+    </div>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/script.js"></script>
 </body>

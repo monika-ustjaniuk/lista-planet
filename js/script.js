@@ -37,7 +37,7 @@ fetch('https://swapi.dev/api/planets/?format=json')
 
       displayList(planeta);
     })
- */
+ 
 
 
 /* let data1 = []
@@ -61,9 +61,7 @@ fetch('https://swapi.dev/api/planets/?format=json')
         </div>`
     })
 
-    let searchInput = document.getElementById('search-bar')
-searchInput.addEventListener("input", e => {
-    const value = e.target.value
+  
      
 })
     document.getElementById("list").innerHTML = data1;
@@ -74,16 +72,32 @@ searchInput.addEventListener("input", e => {
 const dataTemplate = document.querySelector('[data-template]')
 const planetsContainer = document.querySelector('[data-planets-container]')
 const search = document.querySelector('[data-input]')
+const dataPaginationTemplate = document.querySelector('[data-pagination-template]')
+const paginationContainer = document.querySelector('[data-pagination-container]')
+
+let currentPage = 1
 
 
+let displayPlanets = []
+search.addEventListener("input", e => {
+    const serchValue = e.target.value.toLowerCase()
+    displayPlanets.forEach(thisPlanet => {
+        const isVisible = thisPlanet.name.toLowerCase().includes(serchValue)
+        thisPlanet.element.classList.toggle("hide", !isVisible)
+    })
+})
+
+let renderContent = (page) => {
 
 
-
-fetch('https://swapi.dev/api/planets/?format=json')
+    fetch('https://swapi.dev/api/planets/?format=json&page=' + page)
     .then(res => res.json())
     .then(data => {
-        let planeta = data.results;
-        planeta.map(planet => {
+        planeta = data.results;
+        let pageSize = 10;
+        planetsContainer.innerHTML = "";
+        // Render items
+        displayPlanets = planeta.map(planet => {
             const list = dataTemplate.content.cloneNode(true).children[0]
             const name = list.querySelector('[data-name]')
             name.textContent = planet.name
@@ -95,21 +109,43 @@ fetch('https://swapi.dev/api/planets/?format=json')
             climate.textContent = planet.climate
             planetsContainer.append(list)
             return {
+
                 name: planet.name, diameter: planet.diameter, gravity: planet.gravity,
                 climate: planet.climate, element: list
             }
         })
 
-        search.addEventListener("input", e => {
-            const value = e.target.value.toLowerCase()
-            let newList = []
-            newList = planeta
+        // render pagination
+        let pages = Math.round(data.count / pageSize)
+        if (data.count % pageSize != 0 ) {
+            pages = pages + 1 ;
+        }
 
-            newList.forEach(element => {
+        paginationContainer.innerHTML = "";
 
-                console.log(element.name);
+        for(let i = 0 ; i < pages ; i++)
+        {
+            const list = dataPaginationTemplate.content.cloneNode(true).children[0]
+            const name = list.querySelector('[data-page]')
+            
+            name.textContent = i + 1;
+
+            if (currentPage == i + 1) {
+                list.classList.add("active")
+            }
+
+            paginationContainer.append(list);
+
+            name.addEventListener('click', e => {
+                e.preventDefault()
+                
+                currentPage = parseInt(e.currentTarget.textContent)
+                
+                renderContent(currentPage);
             })
-
-        })
-
+    
+        }
     })
+}
+
+renderContent(currentPage);
